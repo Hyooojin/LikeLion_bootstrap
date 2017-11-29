@@ -1,0 +1,73 @@
+<!-- Page Header -->
+<header class="masthead" style="background-image: url(<%= asset_path 'contact-bg.jpg' %>)">
+ <div class="overlay"></div>
+ <div class="container">
+   <div class="row">
+     <div class="col-lg-8 col-md-10 mx-auto">
+       <div class="page-heading">
+         <h1>New Post</h1>
+         <span class="subheading">Create a new post</span>
+       </div>
+     </div>
+   </div>
+ </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+ <div class="row">
+   <div class="col-lg-8 col-md-10 mx-auto">
+     <%= form_tag "", id: "contactForm", novalidate: true do %>
+       <div class="control-group">
+         <div class="form-group floating-label-form-group controls">
+           <label>Title</label>
+           <%= text_field_tag "post[title]", "",class: "form-control", placeholder: "Title" %>
+         </div>
+       </div>
+       <div class="control-group">
+         <div class="form-group floating-label-form-group controls">
+           <label>Contents</label>
+           <%= text_area_tag "post[contents]", "",class: "form-control", placeholder: "Contents" %>
+           <p class="help-block text-danger"></p>
+         </div>
+       </div>
+       <br>
+       <div id="success"></div>
+       <div class="form-group">
+         <button type="submit" class="btn btn-primary" id="sendMessageButton">글올리기</button>
+       </div>
+     <% end %>
+   </div>
+ </div>
+</div>
+
+   <hr>
+
+
+
+
+<%= form_for(@post) do |f| %>
+ <% if @post.errors.any? %>
+   <div id="error_explanation">
+     <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+     <ul>
+     <% @post.errors.full_messages.each do |message| %>
+       <li><%= message %></li>
+     <% end %>
+     </ul>
+   </div>
+ <% end %>
+
+ <div class="field">
+   <%= f.label :title %><br>
+   <%= f.text_field :title %>
+ </div>
+ <div class="field">
+   <%= f.label :contents %><br>
+   <%= f.text_area :contents %>
+ </div>
+ <div class="actions">
+   <%= f.submit %>
+ </div>
+<% end %>
